@@ -19,4 +19,22 @@ class User
     @password = gets.chomp
     puts 'Password was successfully changed.'
   end
+
+  @@users = {}
+
+  def User.add(user)
+    if @@users.keys.include? user.name
+      raise "User #{user.name} already exists"
+    else
+      @@users[user.name] = user
+    end
+  end
+
+  def User.remove(username)
+    if @@users.keys.include? username
+      @@users.delete(username)
+    else
+      raise "User #{username} doesn't exist"
+    end
+  end
 end
