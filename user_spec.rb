@@ -44,4 +44,8 @@ describe User, 'as a users storage' do
   it 'should NOT be able to remove non-existing users' do
     lambda {User.remove('NonExistingUser')}.should raise_error
   end
+
+  it 'should be able to access users list' do
+    User.should respond_to(:users)
+  end
 end
