@@ -1,0 +1,36 @@
+Ruby uzduoties tema: Elektroninis dienynas
+
+Esybes: mokytojas, mokinys, administratorius, dalykas, pazymys, ataskaita, tvarkarastis
+
+30 savybiu (Esmines savybes pazymetos su *):
+
+1. vartotojas gali prisijungti prie sistemos
+2. vartotojas gali atsijungti nuo sistemos
+3. vartotojas gali pasikeisti slaptazodi
+4. administratorius gali registruoti mokytojus
+5. administratorius gali registruoti mokinius
+6. administratorius gali trinti vartotojus
+7. administratorius gali keisti vartotoju slaptazodzius
+8. * mokytojas gali registruoti dalykus
+9. mokytojas gali nurodyti dalyko aprasyma
+10. mokytojas gali nurodyti dalyko tvarkarasti
+11. mokytojas gali trinti dalykus
+12. mokytojas gali matyti savo tvarkarasti
+13. * mokytojas gali priskirti dalykams mokinius
+14. mokytojas gali pasalinti mokini is dalyko saraso
+15. * mokytojas gali suvesti pazymius
+16. * mokytojas gali gauti mokiniu vidurkius
+17. mokytojas gali koreguoti ivestus pazymius
+18. mokytojas gali pasalinti ivestus pazymius
+19. mokytojas vietoj pazymio gali ivesti p ir n raides
+20. mokytojas gali matyti kiek pamoku kiekvienas mokinys praleido
+21. mokinys gali pasirinkti perziurima menesi
+22. mokinys gali matyti visus dalykus vienoje lenteleje
+23. * mokinys gali matyti savo pazymius toje lenteleje
+24. mokinys gali matyti savo vidurkius
+25. mokinys gali matyti kiek pamoku praleido
+26. mokinys gali matyti savo tvarkarasti
+27. mokinys gali gauti bendra dalyku statistika (visu mokiniu vidurkis, visu mokiniu praleistu pamoku vidurkis)
+28. mokinys gali matyti kas desto jo dalykus
+29. mokytojui ivedant pazymi ir nenurodant datos imama siandienos data
+30. mokytojas ivesdamas pazymius gali pasirinkti data ir dalyka viena karta, kad nereiktu ju nurodineti su lig kiekvienu pazymio ivedimu.
