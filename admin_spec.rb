@@ -24,4 +24,12 @@ describe Admin, '(System administrator)' do
     @admin.add_teacher(teacher)
     User.users.values.should include(teacher)
   end
+
+  it 'should be able to remove users' do
+    @admin.should respond_to(:remove_user)
+    user = Student.new('Temporary', 'password')
+    @admin.add_student(user)
+    @admin.remove_user('Temporary')
+    User.users.values.should_not include(user)
+  end
 end

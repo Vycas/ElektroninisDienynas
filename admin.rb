@@ -12,4 +12,8 @@ class Admin < User
     teacher = Teacher.new unless teacher
     User.add(teacher)
   end
+
+  def remove_user(username)
+    User.remove(username)
+  end
 end
