@@ -4,8 +4,18 @@ require 'teacher'
 
 class Admin < User
   def commands
-    ['add_student', 'add_teacher', 'remove_user', 
-     'change_password', 'change_user_password', 'list_users']
+    [:help, :add_student, :add_teacher, :remove_user, 
+     :change_password, :change_user_password, :list_users]
+  end
+
+  def help
+    puts 'Available commands (item in < > are optional):'
+    puts '  add_student - to add new student'
+    puts '  add_teacher - to add new teacher'
+    puts '  remove_user username - to remove user'
+    puts '  change_user_password username <password> - to change user\'s password'
+    puts '  change_password - to change your password'
+    puts '  list_users - to get list of users'
   end
 
   def add_student(student=nil)
