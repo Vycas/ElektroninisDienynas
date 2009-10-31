@@ -26,7 +26,7 @@ class User
 
   @users = {}
   class << self
-    attr :users
+    attr :users, true
   end
 
   def User.add(user)

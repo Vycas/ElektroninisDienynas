@@ -11,6 +11,11 @@ describe Admin, '(System administrator)' do
     @admin.should be_kind_of(User)
   end
 
+  it 'should have a list of available commands' do
+    @admin.should respond_to(:commands)
+    @admin.commands.should be_instance_of([].class)
+  end
+
   it 'should be able to add new student' do
     @admin.should respond_to(:add_student)
     student = Student.new('Student', 'password')

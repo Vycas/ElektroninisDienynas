@@ -48,4 +48,8 @@ describe User, 'as a users storage' do
   it 'should be able to access users list' do
     User.should respond_to(:users)
   end
+
+  it 'should be able to change users list' do
+    User.should respond_to(:users=)
+  end
 end

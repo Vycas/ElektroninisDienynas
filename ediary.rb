@@ -27,7 +27,7 @@ class EDiary
 
         if user = User.users[login]
             if user.password == password
-                puts "Logged in..."
+                go(user)
                 save_state
             else
                 puts 'Incorrect password!'
@@ -36,6 +36,31 @@ class EDiary
             puts 'No such user!'
         end
     end
+
+  def go(user)
+    puts 'You have logged in as ' + user.class.to_s
+    puts 'Type "disconnect" to quit. Type "help" to get info about commands.'
+    while true
+      print '> '
+      cmd = gets.chomp
+      break if cmd == 'disconnect'
+      parts = cmd.split
+      if user.commands.include?(parts[0])
+        begin
+          code = 'user.' + parts[0]
+          code += " '#{parts[1]}'" if parts[1]
+          parts[2..-1].each { |p| code += ", '#{p}'" } if parts[2]
+          puts code
+          eval(code)
+        rescue Exception
+          puts 'Error occured!'
+        end
+      else
+        puts 'Incorrect command!'
+      end
+    end
+    puts 'Disconnected'
+  end
 
     private
 

@@ -3,6 +3,11 @@ require 'student'
 require 'teacher'
 
 class Admin < User
+  def commands
+    ['add_student', 'add_teacher', 'remove_user', 
+     'change_password', 'change_user_password', 'list_users']
+  end
+
   def add_student(student=nil)
     student = Student.new unless student
     User.add student
