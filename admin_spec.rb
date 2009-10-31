@@ -27,9 +27,17 @@ describe Admin, '(System administrator)' do
 
   it 'should be able to remove users' do
     @admin.should respond_to(:remove_user)
-    user = Student.new('Temporary', 'password')
-    @admin.add_student(user)
-    @admin.remove_user('Temporary')
+    user = User.new('User', 'password')
+    User.add(user)
+    @admin.remove_user('User')
     User.users.values.should_not include(user)
+  end
+
+  it 'should be able to change other users passwords' do
+    @admin.should respond_to(:change_user_password)
+    user = User.new('User', 'password')
+    User.add(user)
+    @admin.change_user_password('User', 'newPassword')
+    user.password.should == 'newPassword'
   end
 end

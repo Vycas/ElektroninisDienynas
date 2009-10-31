@@ -14,9 +14,13 @@ class User
   attr :name
   attr :password
 
-  def change_password
-    print 'Enter new password: '
-    @password = gets.chomp
+  def change_password(password=nil)
+    if password
+      @password = password
+    else
+      print 'Enter new password: '
+      @password = gets.chomp
+    end
     puts 'Password was successfully changed.'
   end
 
