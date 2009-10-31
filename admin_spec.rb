@@ -40,4 +40,8 @@ describe Admin, '(System administrator)' do
     @admin.change_user_password('User', 'newPassword')
     user.password.should == 'newPassword'
   end
+
+  it 'should be able to list all registered users' do
+    @admin.should respond_to(:list_users)
+  end
 end

@@ -18,7 +18,14 @@ class Admin < User
   end
 
   def change_user_password(username, password=nil)
-    raise "User #{username} doesn't exist" if not User.users.keys.include? username
+    if not User.users.keys.include? username
+      raise "User #{username} doesn't exist"
+    end
     User.users[username].change_password(password)
+  end
+
+  def list_users
+    puts 'Registered users:'
+    User.users.values.each { |u| puts u.name + ' - ' + u.class.to_s }
   end
 end
