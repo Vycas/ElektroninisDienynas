@@ -1,5 +1,7 @@
 require 'mark'
 require 'date'
+require 'teacher'
+require 'course'
 
 describe Mark do
   before(:each) do
@@ -32,5 +34,26 @@ describe Mark do
 
   it 'should be able to express mark with string "value [yyyy-mm-dd]"' do
     @mark.to_s.should match('(10|[1-9]|n) \[\d{4}-\d{2}-\d{2}\]')
+  end
+end
+
+describe Marks do
+  before(:each) do
+    teacher = Teacher.new('Teacher', 'password')
+    student = Student.new('Student', 'password')
+    course = Course.new(teacher, 'Math', 'Science of numbers', 'Monday 8.00')
+    @marks = Marks.new(course, student)
+  end
+
+  it 'should be a kind of array' do
+    @marks.should be_kind_of(Array)
+  end
+
+  it 'should have student' do
+    @marks.should respond_to(:student)
+  end
+
+  it 'should have course' do
+    @marks.should respond_to(:course)
   end
 end
