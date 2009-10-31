@@ -1,27 +1,18 @@
 class User
-  def initialize(name=nil, password=nil)
-    if name
-      @name = name
-      @password = password
-    else
-      print 'Enter name: '
-      @name = gets.chomp
-      print 'Enter password: '
-      @password = gets.chomp
-    end
+  def initialize(name, password)
+    @name = name
+    @password = password
   end
 
   attr :name
   attr :password
 
-  def change_password(password=nil)
-    if password
-      @password = password
-    else
-      print 'Enter new password: '
-      @password = gets.chomp
-    end
-    puts 'Password was successfully changed.'
+  def change_password(password)
+    @password = password
+  end
+
+  def to_s
+    "#{@name} - #{self.class}" 
   end
 
   @users = {}

@@ -9,22 +9,22 @@ class Admin < User
   end
 
   def help
-    puts 'Available commands (item in < > are optional):'
-    puts '  add_student - to add new student'
-    puts '  add_teacher - to add new teacher'
-    puts '  remove_user username - to remove user'
-    puts '  change_user_password username <password> - to change user\'s password'
-    puts '  change_password - to change your password'
-    puts '  list_users - to get list of users'
+    out =  "Available commands:\n"
+    out << "  add_student <username> <password> - to add new student\n"
+    out << "  add_teacher <username> <password> - to add new teacher\n"
+    out << "  remove_user <username> - to remove user\n"
+    out << "  change_user_password <username> <password> - to change user's password\n"
+    out << "  change_password <password> - to change your password\n"
+    out << "  list_users - to get list of users\n"
   end
 
-  def add_student(student=nil)
-    student = Student.new unless student
+  def add_student(name, password)
+    student = Student.new(name, password)
     User.add student
   end
 
-  def add_teacher(teacher=nil)
-    teacher = Teacher.new unless teacher
+  def add_teacher(name, password)
+    teacher = Teacher.new(name, password)
     User.add teacher
   end
 
@@ -32,7 +32,7 @@ class Admin < User
     User.remove username
   end
 
-  def change_user_password(username, password=nil)
+  def change_user_password(username, password)
     if not User.users.keys.include? username
       raise "User #{username} doesn't exist"
     end
@@ -40,7 +40,8 @@ class Admin < User
   end
 
   def list_users
-    puts 'Registered users:'
-    User.users.values.each { |u| puts u.name + ' - ' + u.class.to_s }
+    out = ""
+    User.users.values.each { |u| out << u.to_s + "\n" }
+    out
   end
 end

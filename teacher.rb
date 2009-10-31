@@ -27,8 +27,8 @@ class Teacher < User
   end
 
   def list_courses
-    output = ''
-    @courses.values.each { |c| output += c.to_s + '\n' }
-    output
+    out = ""
+    @courses.values.each { |c| out << c.to_s + "\n" }
+    out
   end
 end

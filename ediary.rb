@@ -50,7 +50,8 @@ class EDiary
       code = 'user.' + parts[0]
       code += " '#{parts[1]}'" if parts[1]
       parts[2..-1].each { |p| code += ", '#{p}'" } if parts[2]
-      eval(code)
+      out = eval(code)
+      puts out if out.class == String
     rescue Exception
       puts 'Error occured!'
     end

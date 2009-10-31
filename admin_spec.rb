@@ -27,16 +27,16 @@ describe Admin, '(System administrator)' do
 
   it 'should be able to add new student' do
     should_have_command(:add_student)
-    student = Student.new('Student', 'password')
-    @admin.add_student(student)
-    User.users.values.should include(student)
+    @admin.add_student('Student', 'password')
+    User.users.keys.should include('Student')
+    User.users['Student'].should be_instance_of(Student)
   end
 
   it 'should be able to add new teacher' do
     should_have_command(:add_teacher)
-    teacher = Teacher.new('Teacher', 'password')
-    @admin.add_teacher(teacher)
-    User.users.values.should include(teacher)
+    @admin.add_teacher('Teacher', 'password')
+    User.users.keys.should include('Teacher')
+    User.users['Teacher'].should be_instance_of(Teacher)
   end
 
   it 'should be able to remove users' do
