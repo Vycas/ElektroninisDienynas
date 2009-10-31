@@ -1,4 +1,5 @@
 require 'user'
+require 'course'
 
 class Teacher < User
   def initialize(name, password)
@@ -17,6 +18,8 @@ class Teacher < User
     out << "  list_courses - to list existing courses\n"
     out << "  change_password <password> - to change your password\n"
   end
+
+  attr :courses
 
   def add_course(title, description=nil, time=nil)
     if @courses.keys.include? title

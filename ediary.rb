@@ -38,28 +38,28 @@ class EDiary
   end
 
   def go(user)
-  puts 'You have logged in as ' + user.class.to_s
-  puts 'Type "disconnect" to quit. Type "help" to get info about commands.'
-  while true
-    print '> '
-    cmd = gets.chomp
-    break if cmd == 'disconnect'
-    parts = cmd.split
-    if user.commands.include?(parts[0].to_sym)
-    begin
-      code = 'user.' + parts[0]
-      code += " '#{parts[1]}'" if parts[1]
-      parts[2..-1].each { |p| code += ", '#{p}'" } if parts[2]
-      out = eval(code)
-      puts out if out.class == String
-    rescue Exception
-      puts 'Error occured!'
+    puts 'You have logged in as ' + user.class.to_s
+    puts 'Type "disconnect" to quit. Type "help" to get info about commands.'
+    while true
+      print '> '
+      cmd = gets.chomp
+      break if cmd == 'disconnect'
+      parts = cmd.split
+      if user.commands.include?(parts[0].to_sym)
+      #begin
+        code = 'user.' + parts[0]
+        code += " '#{parts[1]}'" if parts[1]
+        parts[2..-1].each { |p| code += ", '#{p}'" } if parts[2]
+        out = eval(code)
+        puts out if out.class == String
+      #rescue Exception
+      #  puts 'Error occured!'
+      #end
+      else
+        puts 'Incorrect command!'
+      end
     end
-    else
-    puts 'Incorrect command!'
-    end
-  end
-  puts 'Disconnected'
+    puts 'Disconnected'
   end
 
   private
