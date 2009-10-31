@@ -16,4 +16,8 @@ class Course
   end
 
   attr_reader :title, :description, :time, :teacher
+
+  def to_s
+    "#{@title} - #{@description} [#{@time}]"
+  end
 end
