@@ -75,7 +75,7 @@ describe Teacher do
     User.remove('John')
   end
 
-  it 'should be able to list assigned to courses students' do
+  it 'should be able to list assigned to courses students and their marks' do
     should_have_command(:list_students)
     @teacher.add_course('Math')
     @teacher.list_students('Math').should be_kind_of(String)

@@ -35,7 +35,7 @@ class Marks < Array
         count += 1
       end
     end
-    count != 0 ? sum / count : "N/A"
+    count != 0 ? sum / count.to_f : "N/A"
   end
 
   def n_count
@@ -52,8 +52,8 @@ class Marks < Array
 
   def to_s
     out = ''
-    self.each { |m| out << m.value + ' ' }
-    out << "Average: #{average} "
+    self.each { |m| out << m.value.to_s + ' ' }
+    out << "Average: #{average.class == Float ? "%.2f" % average : average} "
     out << "n-count: #{n_count} "
     out << "p-count: #{p_count}"
   end

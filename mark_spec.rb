@@ -64,7 +64,7 @@ describe Marks do
     @marks << Mark.new(6)
     @marks << Mark.new(10)
     @marks << Mark.new(7)
-    @marks.average.should be_close((6+10+7)/3, 0.01)
+    @marks.average.should be_close((6+10+7)/3.0, 0.01)
   end
 
   it 'should be able to get n count' do

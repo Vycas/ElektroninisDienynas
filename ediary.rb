@@ -46,15 +46,15 @@ class EDiary
       break if cmd == 'disconnect'
       parts = cmd.split
       if user.commands.include?(parts[0].to_sym)
-      #begin
+      begin
         code = 'user.' + parts[0]
         code += " '#{parts[1]}'" if parts[1]
         parts[2..-1].each { |p| code += ", '#{p}'" } if parts[2]
         out = eval(code)
         puts out if out.class == String
-      #rescue Exception
-      #  puts 'Error occured!'
-      #end
+      rescue Exception
+        puts 'Error occured!'
+      end
       else
         puts 'Incorrect command!'
       end

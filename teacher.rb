@@ -79,18 +79,15 @@ class Teacher < User
   def list_students(course=@current_course)
     raise "Course #{course} doesn't exist." if not @courses.keys.include? course
     out = "Course #{course} is listened by:\n"
-    @courses[course].marks.keys.each { |s| out << "#{s}\n" }
+    @courses[course].marks.keys.each { |s| out << "#{s} - #{@courses[course].marks[s]}\n" }
     out
   end
 
-  def enter(student, mark, course=@default_course)
+  def enter(student, mark, course=@current_course)
     raise "Student #{student} doesn't exist." if not User.users.keys.include? student
     raise "Course #{course} doesn't exist." if not @courses.keys.include? course
     raise "#{student} is not listening this course." if not @courses[course].marks.include? student
-    begin
-      mark = mark.to_i
-    rescue
-    end
+    mark = mark.to_i if mark.to_i != 0
     m = Mark.new(mark)
     @courses[course].marks[student] << m
   end
