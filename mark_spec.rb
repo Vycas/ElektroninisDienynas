@@ -8,14 +8,16 @@ describe Mark do
     @mark = Mark.new(10, Date.today)
   end
 
-  it 'should have value of integer in range 1-10 or string "n"' do
+  it 'should have value of integer in range 1-10 or string "n" or "p"' do
     @mark.should respond_to(:value)
-    if @mark.value.kind_of? Fixnum
-      (1..10).should include(@mark.value)
-    elsif @mark.value.kind_of? String
-      @mark.value.should == "n"
-    else
-      True.should be_false
+    [(1..10).to_a, 'p', 'n'].flatten.each do |v|
+      lambda { Mark.new(v) }.should_not raise_error
+    end
+    (('a'..'z').to_a - ['p', 'n']).each do |v|
+      lambda { Mark.new(v) }.should raise_error
+    end
+    ((-100..100).to_a - (1..10).to_a).each do |v|
+      lambda { Mark.new(v) }.should raise_error
     end
   end
 
@@ -55,5 +57,27 @@ describe Marks do
 
   it 'should have course' do
     @marks.should respond_to(:course)
+  end
+
+  it 'should be able to get marks average' do
+    @marks.should respond_to(:average)
+    @marks << Mark.new(6)
+    @marks << Mark.new(10)
+    @marks << Mark.new(7)
+    @marks.average.should be_close((6+10+7)/3, 0.01)
+  end
+
+  it 'should be able to get n count' do
+    @marks.should respond_to(:n_count)
+    count = rand(10).to_i + 1
+    count.times { @marks << Mark.new('n') }
+    @marks.n_count.should == count
+  end
+
+  it 'should be able to get p count' do
+    @marks.should respond_to(:p_count)
+    count = rand(10).to_i + 1
+    count.times { @marks << Mark.new('p') }
+    @marks.p_count.should == count
   end
 end
