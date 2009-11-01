@@ -11,7 +11,7 @@ class Teacher < User
 
   def commands
     [:help, :change_password, :add_course, :remove_course, :list_courses,
-     :assign_student, :remove_student, :list_students, :default_course]
+     :assign_student, :remove_student, :list_students, :default_course, :enter]
   end
 
   def help
@@ -24,6 +24,7 @@ class Teacher < User
     out << "  assign_student <student> [<course>] - to assign student to a course\n"
     out << "  remove_student <student> [<course>] - to remove student from a course\n"
     out << "  list_students [<course>] - to list students assigned to a course\n"
+    out << "  enter <student> <mark> [<course>] - to enter new mark\n"
   end
 
   attr :courses
@@ -80,5 +81,17 @@ class Teacher < User
     out = "Course #{course} is listened by:\n"
     @courses[course].marks.keys.each { |s| out << "#{s}\n" }
     out
+  end
+
+  def enter(student, mark, course=@default_course)
+    raise "Student #{student} doesn't exist." if not User.users.keys.include? student
+    raise "Course #{course} doesn't exist." if not @courses.keys.include? course
+    raise "#{student} is not listening this course." if not @courses[course].marks.include? student
+    begin
+      mark = mark.to_i
+    rescue
+    end
+    m = Mark.new(mark)
+    @courses[course].marks[student] << m
   end
 end

@@ -80,4 +80,16 @@ describe Teacher do
     @teacher.add_course('Math')
     @teacher.list_students('Math').should be_kind_of(String)
   end
+
+  it 'should be able to enter new marks' do
+    should_have_command(:enter)
+    student = Student.new('John', 'password')
+    User.add(student)
+    @teacher.add_course('Math')
+    @teacher.assign_student('John', 'Math')
+    @teacher.enter('John', 9, 'Math')
+    @teacher.courses['Math'].marks['John'][0].value == 9
+    User.users['John'].marks['Math'][0].value == 9
+    User.remove('John')
+  end
 end
