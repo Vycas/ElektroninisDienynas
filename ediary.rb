@@ -52,8 +52,8 @@ class EDiary
         parts[2..-1].each { |p| code += ", '#{p}'" } if parts[2]
         out = eval(code)
         puts out if out.class == String
-      rescue Exception
-        puts 'Error occured!'
+      rescue => exc
+        puts "Error: #{exc.message}"
       end
       else
         puts 'Incorrect command!'

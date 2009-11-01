@@ -21,7 +21,7 @@ class Student < User
   def get
     out = ''
     @marks.each_pair do |course, marks|
-      out << "#{course} [#{marks.course.teacher.name}] - #{marks.to_s}"
+      out << "#{course} [#{marks.course.teacher.name}] - #{marks.to_s}\n"
     end
     out
   end
