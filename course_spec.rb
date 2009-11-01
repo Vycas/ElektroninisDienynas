@@ -23,4 +23,9 @@ describe Course do
     @course.should respond_to(:teacher)
     @course.teacher.should be_instance_of(Teacher)
   end
+
+  it 'should be able to access student marks' do
+    @course.should respond_to(:marks)
+    @course.marks.should be_instance_of(Hash)
+  end
 end

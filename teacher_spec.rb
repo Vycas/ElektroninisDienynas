@@ -43,4 +43,41 @@ describe Teacher do
     should_have_command(:list_courses)
     @teacher.list_courses.should be_instance_of(String)
   end
+
+  it 'should be able to set default course' do
+    should_have_command(:default_course)
+    @teacher.add_course('Math')
+    @teacher.default_course('Math')
+  end
+
+  it 'should be able to assign student to courses' do
+    should_have_command(:assign_student)
+    student = Student.new('John', 'password')
+    User.add(student)
+    @teacher.add_course('Math')
+    @teacher.assign_student('John', 'Math')
+    @teacher.courses.keys.should include('Math')
+    @teacher.courses['Math'].marks.keys.should include('John')
+    User.users['John'].marks.keys.should include('Math')
+    User.remove('John')
+  end
+
+  it 'should be able to remove students from the course' do
+    should_have_command(:remove_student)
+    student = Student.new('John', 'password')
+    User.add(student)
+    @teacher.add_course('Math')
+    @teacher.assign_student('John', 'Math')
+    @teacher.remove_student('John', 'Math')
+    @teacher.courses.keys.should include('Math')
+    @teacher.courses['Math'].marks.keys.should_not include('John')
+    User.users['John'].marks.keys.should_not include('Math')
+    User.remove('John')
+  end
+
+  it 'should be able to list assigned to courses students' do
+    should_have_command(:list_students)
+    @teacher.add_course('Math')
+    @teacher.list_students('Math').should be_kind_of(String)
+  end
 end

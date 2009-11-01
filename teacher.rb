@@ -1,14 +1,17 @@
 require 'user'
 require 'course'
+require 'mark'
 
 class Teacher < User
   def initialize(name, password)
     super(name, password)
     @courses = {}
+    @current_course = nil
   end
 
   def commands
-    [:help, :change_password, :add_course, :remove_course, :list_courses]
+    [:help, :change_password, :add_course, :remove_course, :list_courses,
+     :assign_student, :remove_student, :list_students, :default_course]
   end
 
   def help
@@ -17,6 +20,10 @@ class Teacher < User
     out << "  remove_course <title> - to remove existing course\n"
     out << "  list_courses - to list existing courses\n"
     out << "  change_password <password> - to change your password\n"
+    out << "  default_course <course> - to set default working course\n"
+    out << "  assign_student <student> [<course>] - to assign student to a course\n"
+    out << "  remove_student <student> [<course>] - to remove student from a course\n"
+    out << "  list_students [<course>] - to list students assigned to a course\n"
   end
 
   attr :courses
@@ -40,6 +47,38 @@ class Teacher < User
   def list_courses
     out = ""
     @courses.values.each { |c| out << c.to_s + "\n" }
+    out
+  end
+
+  def default_course(title)
+    if @courses.keys.include? title
+      @current_course = title
+    else
+      raise "Course #{title} doesn't exist."
+    end
+  end
+
+  def assign_student(student, course=@current_course)
+    raise "Student #{student} doesn't exist." if not User.users.keys.include? student
+    raise "#{student} is not a student." if User.users[student].class != Student
+    raise "Course #{course} doesn't exist." if not @courses.keys.include? course
+    marks = Marks.new(@courses[course], User.users[student])
+    @courses[course].marks[student] = marks
+    User.users[student].marks[course] = marks
+  end
+
+  def remove_student(student, course=@current_course)
+    raise "Student #{student} doesn't exist." if not User.users.keys.include? student
+    raise "Course #{course} doesn't exist." if not @courses.keys.include? course
+    raise "#{student} is not listening this course." if not @courses[course].marks.include? student
+    @courses[course].marks.delete student
+    User.users[student].marks.delete course
+  end
+
+  def list_students(course=@current_course)
+    raise "Course #{course} doesn't exist." if not @courses.keys.include? course
+    out = "Course #{course} is listened by:\n"
+    @courses[course].marks.keys.each { |s| out << "#{s}\n" }
     out
   end
 end
