@@ -24,4 +24,9 @@ describe Student do
     @student.should respond_to(:marks)
     @student.should respond_to(:marks=)
   end
+
+  it 'should be able to get a table of marks' do
+    should_have_command(:get)
+    @student.get.should be_instance_of(String)
+  end
 end
