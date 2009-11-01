@@ -80,4 +80,9 @@ describe Marks do
     count.times { @marks << Mark.new('p') }
     @marks.p_count.should == count
   end
+
+  it 'should be able to provide marks string' do
+    @marks.should respond_to(:to_s)
+    @marks.to_s.should be_instance_of(String)
+  end
 end
