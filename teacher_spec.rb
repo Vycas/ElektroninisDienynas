@@ -84,8 +84,8 @@ describe Teacher do
     @teacher.add_course('Math')
     @teacher.assign_student('John', 'Math')
     @teacher.enter('John', 9, 'Math')
-    @teacher.courses['Math'].marks['John'][0].value == 9
-    User.users['John'].marks['Math'][0].value == 9
+    @teacher.courses['Math'].marks['John'][0].value.should == 9
+    User.users['John'].marks['Math'][0].value.should == 9
     User.remove('John')
   end
 end

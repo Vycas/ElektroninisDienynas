@@ -65,6 +65,10 @@ describe Marks do
     @marks << Mark.new(10)
     @marks << Mark.new(7)
     @marks.average.should be_close((6+10+7)/3.0, 0.01)
+    100.times do
+      @marks << Mark.new(rand(10).to_i + 1)
+    end
+    @marks.average.should be_between(1, 10)
   end
 
   it 'should be able to get n count' do
