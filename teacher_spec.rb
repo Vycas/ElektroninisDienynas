@@ -1,15 +1,11 @@
 require 'teacher'
 require 'user'
 require 'course'
+require 'matchers'
 
 describe Teacher do
   before(:each) do
     @teacher = Teacher.new('Teacher', 'password')
-  end
-
-  def should_have_command(command)
-    @teacher.should respond_to(command)
-    @teacher.commands.should include(command)
   end
 
   it 'should be a kind of user' do
@@ -27,31 +23,31 @@ describe Teacher do
   end
 
   it 'should be able to add new courses' do
-    should_have_command(:add_course)
+    @teacher.should have_command(:add_course)
     @teacher.add_course("Math", "Science of numbers", "Monday 8.00")
     @teacher.courses.keys.should include("Math")
   end
 
   it 'should be able to remove courses' do
-    should_have_command(:remove_course)
+    @teacher.should have_command(:remove_course)
     @teacher.add_course("Math", "Science of numbers", "Monday 8.00")
     @teacher.remove_course("Math")
     @teacher.courses.should_not include("Math")
   end
 
   it 'should be able to list registered courses' do
-    should_have_command(:list_courses)
+    @teacher.should have_command(:list_courses)
     @teacher.list_courses.should be_instance_of(String)
   end
 
   it 'should be able to set default course' do
-    should_have_command(:default_course)
+    @teacher.should have_command(:default_course)
     @teacher.add_course('Math')
     @teacher.default_course('Math')
   end
 
   it 'should be able to assign student to courses' do
-    should_have_command(:assign_student)
+    @teacher.should have_command(:assign_student)
     student = Student.new('John', 'password')
     User.add(student)
     @teacher.add_course('Math')
@@ -63,7 +59,7 @@ describe Teacher do
   end
 
   it 'should be able to remove students from the course' do
-    should_have_command(:remove_student)
+    @teacher.should have_command(:remove_student)
     student = Student.new('John', 'password')
     User.add(student)
     @teacher.add_course('Math')
@@ -76,13 +72,13 @@ describe Teacher do
   end
 
   it 'should be able to list assigned to courses students and their marks' do
-    should_have_command(:list_students)
+    @teacher.should have_command(:list_students)
     @teacher.add_course('Math')
     @teacher.list_students('Math').should be_kind_of(String)
   end
 
   it 'should be able to enter new marks' do
-    should_have_command(:enter)
+    @teacher.should have_command(:enter)
     student = Student.new('John', 'password')
     User.add(student)
     @teacher.add_course('Math')

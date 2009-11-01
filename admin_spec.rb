@@ -1,15 +1,11 @@
 require 'admin'
 require 'user'
 require 'student'
+require 'matchers'
 
 describe Admin, '(System administrator)' do
   before(:each) do
     @admin = Admin.new('Administrator', 'password')
-  end
-
-  def should_have_command(command)
-    @admin.should respond_to(command)
-    @admin.commands.should include(command)
   end
 
   it 'should be a kind of user' do
@@ -22,25 +18,25 @@ describe Admin, '(System administrator)' do
   end
 
   it 'should have help command' do
-    should_have_command(:help)
+    @admin.should have_command(:help)
   end
 
   it 'should be able to add new student' do
-    should_have_command(:add_student)
+    @admin.should have_command(:add_student)
     @admin.add_student('Student', 'password')
     User.users.keys.should include('Student')
     User.users['Student'].should be_instance_of(Student)
   end
 
   it 'should be able to add new teacher' do
-    should_have_command(:add_teacher)
+    @admin.should have_command(:add_teacher)
     @admin.add_teacher('Teacher', 'password')
     User.users.keys.should include('Teacher')
     User.users['Teacher'].should be_instance_of(Teacher)
   end
 
   it 'should be able to remove users' do
-    should_have_command(:remove_user)
+    @admin.should have_command(:remove_user)
     user = User.new('User', 'password')
     User.add(user)
     @admin.remove_user('User')
@@ -48,7 +44,7 @@ describe Admin, '(System administrator)' do
   end
 
   it 'should be able to change other users passwords' do
-    should_have_command(:change_user_password)
+    @admin.should have_command(:change_user_password)
     user = User.new('User', 'password')
     User.add(user)
     @admin.change_user_password('User', 'newPassword')
@@ -56,6 +52,6 @@ describe Admin, '(System administrator)' do
   end
 
   it 'should be able to list all registered users' do
-    should_have_command(:list_users)
+    @admin.should have_command(:list_users)
   end
 end

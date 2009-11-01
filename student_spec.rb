@@ -1,14 +1,10 @@
 require 'student'
 require 'user'
+require 'matchers'
 
 describe Student do
   before(:each) do
     @student = Student.new('Student', 'password')
-  end
-
-  def should_have_command(command)
-    @student.should respond_to(command)
-    @student.commands.should include(command)
   end
 
   it 'should be a kind of user' do
@@ -26,7 +22,7 @@ describe Student do
   end
 
   it 'should be able to get a table of marks' do
-    should_have_command(:get)
+    @student.should have_command(:get)
     @student.get.should be_instance_of(String)
   end
 end
