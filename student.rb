@@ -1,4 +1,4 @@
-require 'User'
+require 'user'
 
 class Student < User
   def initialize(name, password)
@@ -12,6 +12,7 @@ class Student < User
 
   def help
     out =  "Available commands:\n"
+    out << "  help - to show this help\n"
     out << "  change_password <password> - to change your password\n"
     out << "  get - to get a table of marks\n"
   end

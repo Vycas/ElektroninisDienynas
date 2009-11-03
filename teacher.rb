@@ -16,6 +16,7 @@ class Teacher < User
 
   def help
     out =  "Available commands:\n"
+    out << "  help - to show this help\n"
     out << "  add_course <title> [<description>] [<time>] - to add new course\n"
     out << "  remove_course <title> - to remove existing course\n"
     out << "  list_courses - to list existing courses\n"

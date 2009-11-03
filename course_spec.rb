@@ -28,4 +28,10 @@ describe Course do
     @course.should respond_to(:marks)
     @course.marks.should be_instance_of(Hash)
   end
+
+  it 'should be able to get string representation in format "title - description [time]"' do
+    str = @course.to_s
+    str.should be_instance_of(String)
+    str.should match("(.+) - (.*) \\[(.*)\\]")
+  end
 end

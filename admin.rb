@@ -10,6 +10,7 @@ class Admin < User
 
   def help
     out =  "Available commands:\n"
+    out << "  help - to show this help\n"
     out << "  add_student <username> <password> - to add new student\n"
     out << "  add_teacher <username> <password> - to add new teacher\n"
     out << "  remove_user <username> - to remove user\n"
