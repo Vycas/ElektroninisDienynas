@@ -8,8 +8,11 @@ describe Mark do
     @mark = Mark.new(10, Date.today)
   end
 
+  it 'should be able to access its value' do
+    @mark.value.should == 10
+  end
+
   it 'should have value of integer in range 1-10 or string "n" or "p"' do
-    @mark.should respond_to(:value)
     [(1..10).to_a, 'p', 'n'].flatten.each do |v|
       lambda { Mark.new(v) }.should_not raise_error
     end
@@ -21,9 +24,8 @@ describe Mark do
     end
   end
 
-  it 'should have its date' do
-    @mark.should respond_to(:date)
-    @mark.date.should be_instance_of(Date)
+  it 'should be able to access its date' do
+    @mark.date.should == Date.today
   end
 
   it 'should be able to change its value' do
@@ -41,10 +43,10 @@ end
 
 describe Marks do
   before(:each) do
-    teacher = Teacher.new('Teacher', 'password')
-    student = Student.new('Student', 'password')
-    course = Course.new(teacher, 'Math', 'Science of numbers', 'Monday 8.00')
-    @marks = Marks.new(course, student)
+    @teacher = Teacher.new('Teacher', 'password')
+    @student = Student.new('Student', 'password')
+    @course = Course.new(@teacher, 'Math', 'Science of numbers', 'Monday 8.00')
+    @marks = Marks.new(@course, @student)
   end
 
   it 'should be a kind of array' do
@@ -52,15 +54,14 @@ describe Marks do
   end
 
   it 'should have student' do
-    @marks.should respond_to(:student)
+    @marks.student.should == @student
   end
 
   it 'should have course' do
-    @marks.should respond_to(:course)
+    @marks.course.should == @course
   end
 
   it 'should be able to get marks average' do
-    @marks.should respond_to(:average)
     @marks << Mark.new(6)
     @marks << Mark.new(10)
     @marks << Mark.new(7)
@@ -72,14 +73,12 @@ describe Marks do
   end
 
   it 'should be able to get n count' do
-    @marks.should respond_to(:n_count)
     count = rand(10).to_i + 1
     count.times { @marks << Mark.new('n') }
     @marks.n_count.should == count
   end
 
   it 'should be able to get p count' do
-    @marks.should respond_to(:p_count)
     count = rand(10).to_i + 1
     count.times { @marks << Mark.new('p') }
     @marks.p_count.should == count

@@ -6,15 +6,16 @@ describe User, 'as a person' do
   end
 
   it 'should have name' do
-    @user.should respond_to(:name)
+    @user.name.should == 'John'
   end
 
   it 'should have password' do
-    @user.should respond_to(:password)
+    @user.password.should == 'secret'
   end
 
   it 'should be able to change password' do
-    @user.should respond_to(:change_password)
+    @user.change_password('password')
+    @user.password.should == 'password'
   end
 
   it 'should NOT be able to change user name' do

@@ -1,27 +1,27 @@
 require 'course'
 require 'teacher'
+require 'student'
 
 describe Course do
   before(:each) do
-    teacher = Teacher.new('Teacher', 'password')
-    @course = Course.new(teacher, 'Math', 'Science of numbers', 'Monday 8.00')
+    @teacher = Teacher.new('Teacher', 'password')
+    @course = Course.new(@teacher, 'Math', 'Science of numbers', 'Monday 8.00')
   end
 
   it 'should have title' do
-    @course.should respond_to(:title)
+    @course.title.should == 'Math'
   end
 
   it 'should have description' do
-    @course.should respond_to(:description)
+    @course.description.should == 'Science of numbers'
   end
 
   it 'should have time' do
-    @course.should respond_to(:time)
+    @course.time.should == 'Monday 8.00'
   end
 
   it 'should have assigned teacher' do
-    @course.should respond_to(:teacher)
-    @course.teacher.should be_instance_of(Teacher)
+    @course.teacher.should == @teacher
   end
 
   it 'should be able to access student marks' do
@@ -31,7 +31,6 @@ describe Course do
 
   it 'should be able to get string representation in format "title - description [time]"' do
     str = @course.to_s
-    str.should be_instance_of(String)
     str.should match("(.+) - (.*) \\[(.*)\\]")
   end
 end

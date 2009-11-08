@@ -79,7 +79,8 @@ describe Teacher do
   end
 
   it 'should be able to list registered courses' do
-    @teacher.list_courses.should be_instance_of(String)
+    courses = @teacher.list_courses
+    @teacher.courses.each { |c| courses.should include(c) }
   end
 
   it 'should be able to set default course' do
@@ -117,8 +118,16 @@ describe Teacher do
   end
 
   it 'should be able to list assigned to courses students and their marks' do
+    student = Student.new('John', 'password')
+    User.add(student)
     @teacher.add_course('Math')
-    @teacher.list_students('Math').should be_kind_of(String)
+    @teacher.assign_student('John', 'Math')
+    @teacher.enter('John', 9, 'Math')
+    @teacher.enter('John', 6, 'Math')
+    @teacher.enter('John', 4, 'Math')
+    list = @teacher.list_students('Math')
+    list.should include("John - #{@teacher.courses['Math'].marks['John']}")
+    User.remove('John')
   end
 
   it 'should be able to enter new marks' do
